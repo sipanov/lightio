@@ -531,7 +531,7 @@ bool reader::read_vector(std::vector<T> &vect) {
         std::string line;
         if (std::getline(*m_is, line)) {
             std::stringstream line_stream(line);
-            for (int col = 0; col < cols; col++) {
+            for (int col = 0; col < int(cols); col++) {
                 T val;
                 read_one(line_stream, val);
                 vect.push_back(val);
@@ -543,7 +543,7 @@ bool reader::read_vector(std::vector<T> &vect) {
         // rows = N, cols = 1
         std::string line;
 
-        for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < int(rows); row++) {
             if (std::getline(*m_is, line)) {
                 T val;
                 std::stringstream line_stream(line);
@@ -565,7 +565,7 @@ bool reader::read_complex_vector(std::vector<std::complex<T>> &vect) {
         std::string line;
         if (std::getline(*m_is, line)) {
             std::stringstream line_stream(line);
-            for (int col = 0; col < cols; col++) {
+            for (int col = 0; col < int(cols); col++) {
                 std::complex<T> val;
                 read_one_complex(line_stream, val);
                 vect.push_back(val);
@@ -577,7 +577,7 @@ bool reader::read_complex_vector(std::vector<std::complex<T>> &vect) {
         // rows = N, cols = 1
         std::string line;
 
-        for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < int(rows); row++) {
             if (std::getline(*m_is, line)) {
                 std::complex<T> val;
                 std::stringstream line_stream(line);
@@ -598,11 +598,11 @@ bool reader::read_matrix(std::vector<std::vector<T> > &matrix) {
         || var_type == VECTOR
         || var_type == COVECTOR) {
         std::string line;
-        for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < int(rows); row++) {
             if (std::getline(*m_is, line)) {
                 std::vector<T> mat_row;
                 std::stringstream line_stream(line);
-                for (int col = 0; col < cols; col++) {
+                for (int col = 0; col < int(cols); col++) {
                     T val;
                     read_one(line_stream, val);
                     mat_row.push_back(val);
@@ -624,11 +624,11 @@ bool reader::read_complex_matrix(std::vector<std::vector<std::complex<T>>>
         || var_type == COMPLEX_VECTOR
         || var_type == COMPLEX_COVECTOR) {
         std::string line;
-        for (int row = 0; row < rows; row++) {
+        for (int row = 0; row < int(rows); row++) {
             if (std::getline(*m_is, line)) {
                 std::vector<std::complex<T>> mat_row;
                 std::stringstream line_stream(line);
-                for (int col = 0; col < cols; col++) {
+                for (int col = 0; col < int(cols); col++) {
                     std::complex<T> val;
                     read_one_complex(line_stream, val);
                     mat_row.push_back(val);
@@ -652,7 +652,7 @@ inline bool reader::skip_one() {
         if (lines == 0)
             lines++;
 
-        for (int i = 0; i < lines; i++) {
+        for (int i = 0; i < int(lines); i++) {
             std::getline(*m_is, str);
         }
         read_header();

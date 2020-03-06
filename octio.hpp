@@ -105,7 +105,6 @@ public:
 
     ~writer() {
         if (own_stream) {
-            std:;
             dynamic_cast<std::ofstream *>(m_os)->close();
             delete (m_os);
         }
