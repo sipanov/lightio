@@ -19,6 +19,9 @@ inline void writer::write_header(enum octave_type type,
         case SCALAR:
             *m_os << scalar_tag << std::endl;
             break;
+        case STRING:
+            *m_os << string_tag << std::endl;
+            break;
         case VECTOR:
         case COVECTOR:
         case MATRIX:
@@ -44,7 +47,14 @@ inline void writer::write_dims(std::size_t rows, std::size_t cols) {
     *m_os << "# columns: " << cols << std::endl;
 }
 
-/// Write one scalar value
+//// Write string dims
+inline void writer::write_strdesc(std::size_t length, std::size_t count) {
+    // TODI: add crosscheck with var type.
+    *m_os << "# elements: " << count << std::endl;
+    *m_os << "# length: " << length << std::endl;
+}
+
+// Write one scalar value
 template<typename T>
 void writer::write_one(const T &val) {
     *m_os << ' ' << boost::lexical_cast<std::string>(val);
@@ -64,10 +74,20 @@ bool writer::write_scalar(const T &val, const std::string name) {
     write_header(SCALAR, name);
     write_one(val);
     *m_os << std::endl;
-
     *m_os << std::endl << std::endl;
     return true;
 }
+
+bool writer::write_string(const std::string &str,
+                  const std::string &name) {
+    write_header(STRING, name);
+    write_strdesc(str.length());
+    *m_os << str;
+    *m_os << std::endl;
+    *m_os << std::endl << std::endl;
+    return true;
+}
+
 
 template<typename T>
 bool writer::write_complex_scalar(const std::complex<T> &val,
@@ -325,6 +345,13 @@ bool
 inline writer::write<std::complex<long double>>(const std::complex<long double> &val,
                                          const std::string &name) {
     return writer::write_complex_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<std::string>
+        (const std::string &s,
+         const std::string &name) {
+    return writer::write_string(s, name);
 }
 
 template<>

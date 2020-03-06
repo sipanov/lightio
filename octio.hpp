@@ -16,6 +16,7 @@ namespace octio {
 enum octave_type {
     INVALID,
     SCALAR,
+    STRING,
     COMPLEX_SCALAR,
     MATRIX,
     COMPLEX_MATRIX,
@@ -32,6 +33,7 @@ static const std::string rows_tag = "rows:";
 static const std::string cols_tag = "columns:";
 static const std::string complex_tag = "complex";
 static const std::string scalar_tag = "scalar";
+static const std::string string_tag = "string";
 static const std::string matrix_tag = "matrix";
 
 class writer {
@@ -39,7 +41,7 @@ class writer {
     bool own_stream;
 
     void write_file_header(const std::string &header) {
-        *m_os << comment_char << header << std::endl;
+        *m_os << comment_char << " " << header << std::endl;
     }
 
     /// Write header
@@ -47,6 +49,9 @@ class writer {
 
     /// Write dimentions
     void write_dims(std::size_t rows, std::size_t cols);
+
+    //// Write string dims
+    void write_strdesc(std::size_t length, std::size_t count = 1);
 
     /// Write one scalar value
     template<typename T>
@@ -58,6 +63,9 @@ class writer {
 
     template<typename T>
     bool write_scalar(const T &val, const std::string name);
+
+    bool write_string(const std::string &str,
+                      const std::string &name);
 
     template<typename T>
     bool write_vector(const std::vector<T> &vect,
