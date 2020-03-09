@@ -228,44 +228,62 @@ bool writer::write_matrix(const std::vector<std::vector<T> > &mat,
 }
 
 template<>
-inline bool writer::write<int>(const int &val,
-                        const std::string &name) {
+inline bool writer::write<int8_t>(const int8_t &val,
+                               const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<int16_t>(const int16_t &val,
+                               const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<int32_t>(const int32_t &val,
+                               const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<int64_t>(const int64_t &val,
+                               const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<float>(const float &val,
-                          const std::string &name) {
+                                 const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<double>(const double &val,
-                           const std::string &name) {
+                                  const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<long double>(const long double &val,
-                                const std::string &name) {
+                                       const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<std::vector<int>>(const std::vector<int> &vect,
-                                     const std::string &name) {
+                                            const std::string &name) {
     return writer::write_vector(vect, name);
 }
 
 template<>
 inline bool writer::write<std::vector<float>>(const std::vector<float> &vect,
-                                       const std::string &name) {
+                                              const std::string &name) {
     return writer::write_vector(vect, name);
 }
 
 template<>
 inline bool writer::write<std::vector<double>>(const std::vector<double> &vect,
-                                        const std::string &name) {
+                                               const std::string &name) {
     return writer::write_vector(vect, name);
 }
 
@@ -277,32 +295,72 @@ inline bool writer::write<std::vector<long double>>
 }
 
 template<>
-inline bool writer::write_covec<int>(const std::vector<int> &vect,
-                              const std::string &name) {
+inline bool writer::write_covec<int8_t>(const std::vector<int8_t> &vect,
+                                     const std::string &name) {
+    return writer::write_covector(vect, name);
+}
+
+template<>
+inline bool writer::write_covec<int16_t>(const std::vector<int16_t> &vect,
+                                     const std::string &name) {
+    return writer::write_covector(vect, name);
+}
+
+template<>
+inline bool writer::write_covec<int32_t>(const std::vector<int32_t> &vect,
+                                     const std::string &name) {
+    return writer::write_covector(vect, name);
+}
+
+template<>
+inline bool writer::write_covec<int64_t>(const std::vector<int64_t> &vect,
+                                     const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
 template<>
 inline bool writer::write_covec<float>(const std::vector<float> &vect,
-                                const std::string &name) {
+                                       const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
 template<>
 inline bool writer::write_covec<double>(const std::vector<double> &vect,
+                                        const std::string &name) {
+    return writer::write_covector(vect, name);
+}
+
+template<>
+inline bool
+writer::write_covec<long double>(const std::vector<long double> &vect,
                                  const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
 template<>
-inline bool writer::write_covec<long double>(const std::vector<long double> &vect,
-                                      const std::string &name) {
-    return writer::write_covector(vect, name);
+inline bool writer::write<std::vector<std::vector<int8_t>>>
+        (const std::vector<std::vector<int8_t> > &matrix,
+         const std::string &name) {
+    return writer::write_matrix(matrix, name);
 }
 
 template<>
-inline bool writer::write<std::vector<std::vector<int>>>
-        (const std::vector<std::vector<int> > &matrix,
+inline bool writer::write<std::vector<std::vector<int16_t>>>
+        (const std::vector<std::vector<int16_t> > &matrix,
+         const std::string &name) {
+    return writer::write_matrix(matrix, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::vector<int32_t>>>
+        (const std::vector<std::vector<int32_t> > &matrix,
+         const std::string &name) {
+    return writer::write_matrix(matrix, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::vector<int64_t>>>
+        (const std::vector<std::vector<int64_t> > &matrix,
          const std::string &name) {
     return writer::write_matrix(matrix, name);
 }
@@ -329,20 +387,48 @@ inline bool writer::write<std::vector<std::vector<long double>>>
 }
 
 template<>
+inline bool writer::write<std::complex<int8_t>>(const std::complex<int8_t> &val,
+                                             const std::string &name) {
+    return writer::write_complex_scalar(val, name);
+}
+
+template<>
+inline bool
+writer::write<std::complex<int16_t>>(const std::complex<int16_t> &val,
+                                          const std::string &name) {
+    return writer::write_complex_scalar(val, name);
+}
+
+template<>
+inline bool
+writer::write<std::complex<int32_t>>(const std::complex<int32_t> &val,
+                                     const std::string &name) {
+    return writer::write_complex_scalar(val, name);
+}
+
+template<>
+inline bool
+writer::write<std::complex<int64_t>>(const std::complex<int64_t> &val,
+                                     const std::string &name) {
+    return writer::write_complex_scalar(val, name);
+}
+
+template<>
 inline bool writer::write<std::complex<float>>(const std::complex<float> &val,
-                                        const std::string &name) {
+                                               const std::string &name) {
     return writer::write_complex_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<std::complex<double>>(const std::complex<double> &val,
-                                         const std::string &name) {
+                                                const std::string &name) {
     return writer::write_complex_scalar(val, name);
 }
 
 template<>
-bool
-inline writer::write<std::complex<long double>>(const std::complex<long double> &val,
+inline bool
+writer::write<std::complex<long double>>(const std::complex<long
+double> &val,
                                          const std::string &name) {
     return writer::write_complex_scalar(val, name);
 }
@@ -352,6 +438,34 @@ inline bool writer::write<std::string>
         (const std::string &s,
          const std::string &name) {
     return writer::write_string(s, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::complex<int8_t>>>
+        (const std::vector<std::complex<int8_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_vector(vect, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::complex<int16_t>>>
+        (const std::vector<std::complex<int16_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_vector(vect, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::complex<int32_t>>>
+        (const std::vector<std::complex<int32_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_vector(vect, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::complex<int64_t>>>
+        (const std::vector<std::complex<int64_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_vector(vect, name);
 }
 
 template<>
@@ -376,6 +490,34 @@ inline bool writer::write<std::vector<std::complex<long double>>>
 }
 
 template<>
+inline bool writer::write_covec<std::complex<int8_t>>
+        (const std::vector<std::complex<int8_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_covector(vect, name);
+}
+
+template<>
+inline bool writer::write_covec<std::complex<int16_t>>
+        (const std::vector<std::complex<int16_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_covector(vect, name);
+}
+
+template<>
+inline bool writer::write_covec<std::complex<int32_t>>
+        (const std::vector<std::complex<int32_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_covector(vect, name);
+}
+
+template<>
+inline bool writer::write_covec<std::complex<int64_t>>
+        (const std::vector<std::complex<int64_t>> &vect,
+         const std::string &name) {
+    return writer::write_complex_covector(vect, name);
+}
+
+template<>
 inline bool writer::write_covec<std::complex<float>>
         (const std::vector<std::complex<float>> &vect,
          const std::string &name) {
@@ -394,6 +536,34 @@ inline bool writer::write_covec<std::complex<long double>>
         (const std::vector<std::complex<long double>> &vect,
          const std::string &name) {
     return writer::write_complex_covector(vect, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::vector<std::complex<int8_t>>>>
+        (const std::vector<std::vector<std::complex<int8_t>>> &matrix,
+         const std::string &name) {
+    return writer::write_complex_matrix(matrix, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::vector<std::complex<int16_t>>>>
+        (const std::vector<std::vector<std::complex<int16_t>>> &matrix,
+         const std::string &name) {
+    return writer::write_complex_matrix(matrix, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::vector<std::complex<int32_t>>>>
+        (const std::vector<std::vector<std::complex<int32_t>>> &matrix,
+         const std::string &name) {
+    return writer::write_complex_matrix(matrix, name);
+}
+
+template<>
+inline bool writer::write<std::vector<std::vector<std::complex<int64_t>>>>
+        (const std::vector<std::vector<std::complex<int64_t>>> &matrix,
+         const std::string &name) {
+    return writer::write_complex_matrix(matrix, name);
 }
 
 template<>
@@ -697,7 +867,22 @@ bool reader::read(T &var) {
 }
 
 template<>
-inline bool reader::read<int>(int &val) {
+inline bool reader::read<int8_t>(int8_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<int16_t>(int16_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<int32_t>(int32_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<int64_t>(int64_t &val) {
     return reader::read_scalar(val);
 }
 
@@ -714,6 +899,26 @@ inline bool reader::read<double>(double &val) {
 template<>
 inline bool reader::read<long double>(long double &val) {
     return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<std::complex<int8_t>>(std::complex<int8_t> &val) {
+    return reader::read_complex_scalar(val);
+}
+
+template<>
+inline bool reader::read<std::complex<int16_t>>(std::complex<int16_t> &val) {
+    return reader::read_complex_scalar(val);
+}
+
+template<>
+inline bool reader::read<std::complex<int32_t>>(std::complex<int32_t> &val) {
+    return reader::read_complex_scalar(val);
+}
+
+template<>
+inline bool reader::read<std::complex<int64_t>>(std::complex<int64_t> &val) {
+    return reader::read_complex_scalar(val);
 }
 
 template<>
@@ -734,8 +939,26 @@ reader::read<std::complex<long double>>(std::complex<long double> &val) {
 
 
 template<>
-inline bool reader::read<std::vector<int>>
-        (std::vector<int> &vect) {
+inline bool reader::read<std::vector<int8_t>>
+        (std::vector<int8_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<int16_t>>
+        (std::vector<int16_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<int32_t>>
+        (std::vector<int32_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<int64_t>>
+        (std::vector<int64_t> &vect) {
     return reader::read_vector(vect);
 }
 
@@ -758,6 +981,30 @@ inline bool reader::read<std::vector<long double>>
 }
 
 template<>
+inline bool reader::read<std::vector<std::complex<int8_t>>>
+        (std::vector<std::complex<int8_t>> &vect) {
+    return reader::read_complex_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<std::complex<int16_t>>>
+        (std::vector<std::complex<int16_t>> &vect) {
+    return reader::read_complex_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<std::complex<int32_t>>>
+        (std::vector<std::complex<int32_t>> &vect) {
+    return reader::read_complex_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<std::complex<int64_t>>>
+        (std::vector<std::complex<int64_t>> &vect) {
+    return reader::read_complex_vector(vect);
+}
+
+template<>
 inline bool reader::read<std::vector<std::complex<float>>>
         (std::vector<std::complex<float>> &vect) {
     return reader::read_complex_vector(vect);
@@ -776,8 +1023,26 @@ inline bool reader::read<std::vector<std::complex<long double>>>
 }
 
 template<>
-inline bool reader::read<std::vector<std::vector<int>>>
-        (std::vector<std::vector<int> > &matrix) {
+inline bool reader::read<std::vector<std::vector<int8_t>>>
+        (std::vector<std::vector<int8_t> > &matrix) {
+    return reader::read_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<int16_t>>>
+        (std::vector<std::vector<int16_t> > &matrix) {
+    return reader::read_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<int32_t>>>
+        (std::vector<std::vector<int32_t> > &matrix) {
+    return reader::read_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<int64_t>>>
+        (std::vector<std::vector<int64_t> > &matrix) {
     return reader::read_matrix(matrix);
 }
 
@@ -797,6 +1062,30 @@ template<>
 inline bool reader::read<std::vector<std::vector<long double>>>
         (std::vector<std::vector<long double> > &matrix) {
     return reader::read_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<std::complex<int8_t>>>>
+        (std::vector<std::vector<std::complex<int8_t>>> &matrix) {
+    return reader::read_complex_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<std::complex<int16_t>>>>
+        (std::vector<std::vector<std::complex<int16_t>>> &matrix) {
+    return reader::read_complex_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<std::complex<int32_t>>>>
+        (std::vector<std::vector<std::complex<int32_t>>> &matrix) {
+    return reader::read_complex_matrix(matrix);
+}
+
+template<>
+inline bool reader::read<std::vector<std::vector<std::complex<int64_t>>>>
+        (std::vector<std::vector<std::complex<int64_t>>> &matrix) {
+    return reader::read_complex_matrix(matrix);
 }
 
 template<>

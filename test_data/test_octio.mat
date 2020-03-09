@@ -1,0 +1,93 @@
+# Created by Octave 4.0.3, Sun Sep 09 16:27:17 2018 EDT <atyurina@pad.sipan.lan>
+# name: int_var
+# type: scalar
+ 10
+
+
+# name: ldouble_var
+# type: scalar
+ 0.393939393939393939393939393939393939393939393939393939393939393939393
+
+
+# name: cfloat_mat
+# type: complex matrix
+# rows: 3
+# columns: 4
+ (1.1,3.2) (inf,4.5) (1.0,3.5) (NAN,4.7)
+ (5.6,-Inf) (6.1,nan) (5.7,7.1) (Inf,8.1)
+ (1.3,3.5) (2.1,4.7) (NaN,3.9) (2.1,4.9)
+
+
+# name: cint_vect
+# type: complex matrix
+# rows: 1
+# columns: 4
+ (1,3) (4,5) (1,5) (5,4)
+
+
+# name: cfloat_vect
+# type: complex matrix
+# rows: 1
+# columns: 4
+ (1.1,3.2) (inf,4.5) (1.0,3.5) (NAN,4.7)
+
+
+# name: cfloat_covect
+# type: complex matrix
+# rows: 3
+# columns: 1
+ (1.1,3.2)
+ (5.6,-Inf)
+ (1.3,3.5)
+
+
+# name: float_vect
+# type: matrix
+# rows: 1
+# columns: 4
+ 3.2 inf 3.5 NAN
+
+
+# name: float_covect
+# type: matrix
+# rows: 3
+# columns: 1
+ 3.2
+ -Inf
+ 3.5
+
+
+# name: cdouble_var
+# type: complex scalar
+ (nan,0.978393939393939393939393939393939393939393939393939)
+
+
+# name: cfloat_var
+# type: complex scalar
+ (0.756393939393939393939393939393939393939393939393939,inf)
+
+
+# name: cldouble_var
+# type: complex scalar
+ (-inf,0.978393939393939393939393939393939393939393939393939)
+
+
+# name: double_var
+# type: scalar
+ 0.7393939393939393939393939393939393939393939393939393939393939393939393
+
+
+# name: float_mat
+# type: matrix
+# rows: 3
+# columns: 4
+ 3.2 nan 3.5 4.7393939393939393939393939393939393939393939393939393939393939393939393
+ 5.6 6.1 inf 8.1
+ 1.3 -Inf 3.9 4.9
+
+
+# name: float_var
+# type: scalar
+ 0.4393939393939393939393939393939393939393939393939393939393939393939393
+
+

@@ -25,11 +25,11 @@ using namespace ssan::octio;
 template<typename T>
 void print_matrix(const std::vector<std::vector<T>> &matrix,
         const std::string & name) {
-    if (matrix.size()) {
+    if (!matrix.empty()) {
         std::cout << name << "["
                   << matrix.size() << ","
                   << matrix[0].size() << "]: [" << std::endl;
-        for (auto row : matrix) {
+        for (const auto & row : matrix) {
             for (auto element : row) {
                 std::cout << " " << lexical_cast<std::string>(element);
             }
@@ -41,7 +41,7 @@ void print_matrix(const std::vector<std::vector<T>> &matrix,
 
 template<typename T>
 void print_vector(const std::vector<T> &vector, const std::string & name) {
-    if (vector.size()) {
+    if (!vector.empty()) {
         std::cout << name << "["
                   << vector.size() << "]: [";
         for (auto element : vector) {
@@ -69,6 +69,7 @@ int main() {
     std::vector<float> float_covect;
     std::vector<double> double_covect;
     std::vector<long double> ldouble_covect;
+    std::vector<std::complex<int>> cint_vect;
     std::vector<std::complex<float>> cfloat_vect;
     std::vector<std::complex<double>> cdouble_vect;
     std::vector<std::complex<long double>> cldouble_vect;
@@ -144,7 +145,10 @@ int main() {
             }
         } else if (input.next_type() == COMPLEX_VECTOR
                    || input.next_type() == COMPLEX_COVECTOR) {
-            if (input.next_name() == "cfloat_vect") {
+            if (input.next_name() == "cint_vect") {
+                consumed = input.read(cint_vect);
+                output.write(cint_vect, "cint_vect");
+            } else if (input.next_name() == "cfloat_vect") {
                 consumed = input.read(cfloat_vect);
                 output.write(cfloat_vect, "cfloat_vect");
             } else if (input.next_name() == "cdouble_vect") {
@@ -210,6 +214,7 @@ int main() {
               << std::endl;
     print_vector(float_vect, "float_vect");
     print_vector(float_covect, "float_covect");
+    print_vector(cint_vect, "cint_vect");
     print_vector(cfloat_vect, "cfloat_vect");
     print_vector(cfloat_covect, "cfloat_covect");
     print_matrix(float_mat, "float_mat");
