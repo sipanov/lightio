@@ -79,7 +79,7 @@ bool writer::write_scalar(const T &val, const std::string name) {
 }
 
 bool writer::write_string(const std::string &str,
-                  const std::string &name) {
+                          const std::string &name) {
     write_header(STRING, name);
     write_strdesc(str.length());
     *m_os << str;
@@ -229,25 +229,25 @@ bool writer::write_matrix(const std::vector<std::vector<T> > &mat,
 
 template<>
 inline bool writer::write<int8_t>(const int8_t &val,
-                               const std::string &name) {
+                                  const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<int16_t>(const int16_t &val,
-                               const std::string &name) {
+                                   const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<int32_t>(const int32_t &val,
-                               const std::string &name) {
+                                   const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
 template<>
 inline bool writer::write<int64_t>(const int64_t &val,
-                               const std::string &name) {
+                                   const std::string &name) {
     return writer::write_scalar(val, name);
 }
 
@@ -270,8 +270,30 @@ inline bool writer::write<long double>(const long double &val,
 }
 
 template<>
-inline bool writer::write<std::vector<int>>(const std::vector<int> &vect,
-                                            const std::string &name) {
+inline bool
+writer::write<std::vector<int8_t>>(const std::vector<int8_t> &vect,
+                                   const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<int16_t>>(const std::vector<int16_t> &vect,
+                                    const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<int32_t>>(const std::vector<int32_t> &vect,
+                                    const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<int64_t>>(const std::vector<int64_t> &vect,
+                                    const std::string &name) {
     return writer::write_vector(vect, name);
 }
 
@@ -296,25 +318,25 @@ inline bool writer::write<std::vector<long double>>
 
 template<>
 inline bool writer::write_covec<int8_t>(const std::vector<int8_t> &vect,
-                                     const std::string &name) {
+                                        const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
 template<>
 inline bool writer::write_covec<int16_t>(const std::vector<int16_t> &vect,
-                                     const std::string &name) {
+                                         const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
 template<>
 inline bool writer::write_covec<int32_t>(const std::vector<int32_t> &vect,
-                                     const std::string &name) {
+                                         const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
 template<>
 inline bool writer::write_covec<int64_t>(const std::vector<int64_t> &vect,
-                                     const std::string &name) {
+                                         const std::string &name) {
     return writer::write_covector(vect, name);
 }
 
@@ -388,14 +410,14 @@ inline bool writer::write<std::vector<std::vector<long double>>>
 
 template<>
 inline bool writer::write<std::complex<int8_t>>(const std::complex<int8_t> &val,
-                                             const std::string &name) {
+                                                const std::string &name) {
     return writer::write_complex_scalar(val, name);
 }
 
 template<>
 inline bool
 writer::write<std::complex<int16_t>>(const std::complex<int16_t> &val,
-                                          const std::string &name) {
+                                     const std::string &name) {
     return writer::write_complex_scalar(val, name);
 }
 

@@ -61,7 +61,10 @@ int main() {
     std::complex<float> cfloat_var(nanf(""), nanf(""));
     std::complex<double> cdouble_var(nan(""), nan(""));
     std::complex<long double> cldouble_var(nanl(""), nanl(""));
-    std::vector<int> int_vect;
+    std::vector<int8_t> int8_vect;
+    std::vector<int16_t> int16_vect;
+    std::vector<int32_t> int32_vect;
+    std::vector<int64_t> int64_vect;
     std::vector<float> float_vect;
     std::vector<double> double_vect;
     std::vector<long double> ldouble_vect;
@@ -124,8 +127,18 @@ int main() {
             }
         } else if (input.next_type() == VECTOR
                    || input.next_type() == COVECTOR) {
-            if (input.next_name() == "int_vect") {
-                consumed = input.read(int_vect);
+            if (input.next_name() == "int8_vect") {
+                consumed = input.read(int8_vect);
+                output.write(int8_vect, "int8_vect");
+            } else if (input.next_name() == "int16_vect") {
+                consumed = input.read(int16_vect);
+                output.write(int16_vect, "int16_vect");
+            } else if (input.next_name() == "int32_vect") {
+                consumed = input.read(int32_vect);
+                output.write(int32_vect, "int32_vect");
+            } else if (input.next_name() == "int64_vect") {
+                consumed = input.read(int64_vect);
+                output.write(int64_vect, "int64_vect");
             } else if (input.next_name() == "float_vect") {
                 consumed = input.read(float_vect);
                 output.write(float_vect, "float_vect");
