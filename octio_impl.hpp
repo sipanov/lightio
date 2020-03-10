@@ -8,6 +8,8 @@
 #ifndef OCTIO_OCTIO_IMPL_HPP
 #define OCTIO_OCTIO_IMPL_HPP
 
+#include <cstdint>
+
 namespace ssan {
 namespace octio {
 /// Write header
@@ -252,6 +254,30 @@ inline bool writer::write<int64_t>(const int64_t &val,
 }
 
 template<>
+inline bool writer::write<uint8_t>(const uint8_t &val,
+                                  const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<uint16_t>(const uint16_t &val,
+                                   const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<uint32_t>(const uint32_t &val,
+                                   const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
+inline bool writer::write<uint64_t>(const uint64_t &val,
+                                   const std::string &name) {
+    return writer::write_scalar(val, name);
+}
+
+template<>
 inline bool writer::write<float>(const float &val,
                                  const std::string &name) {
     return writer::write_scalar(val, name);
@@ -293,6 +319,34 @@ writer::write<std::vector<int32_t>>(const std::vector<int32_t> &vect,
 template<>
 inline bool
 writer::write<std::vector<int64_t>>(const std::vector<int64_t> &vect,
+                                    const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<uint8_t>>(const std::vector<uint8_t> &vect,
+                                   const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<uint16_t>>(const std::vector<uint16_t> &vect,
+                                    const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<uint32_t>>(const std::vector<uint32_t> &vect,
+                                    const std::string &name) {
+    return writer::write_vector(vect, name);
+}
+
+template<>
+inline bool
+writer::write<std::vector<uint64_t>>(const std::vector<uint64_t> &vect,
                                     const std::string &name) {
     return writer::write_vector(vect, name);
 }
@@ -909,6 +963,26 @@ inline bool reader::read<int64_t>(int64_t &val) {
 }
 
 template<>
+inline bool reader::read<uint8_t>(uint8_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<uint16_t>(uint16_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<uint32_t>(uint32_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
+inline bool reader::read<uint64_t>(uint64_t &val) {
+    return reader::read_scalar(val);
+}
+
+template<>
 inline bool reader::read<float>(float &val) {
     return reader::read_scalar(val);
 }
@@ -981,6 +1055,31 @@ inline bool reader::read<std::vector<int32_t>>
 template<>
 inline bool reader::read<std::vector<int64_t>>
         (std::vector<int64_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+
+template<>
+inline bool reader::read<std::vector<uint8_t>>
+        (std::vector<uint8_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<uint16_t>>
+        (std::vector<uint16_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<uint32_t>>
+        (std::vector<uint32_t> &vect) {
+    return reader::read_vector(vect);
+}
+
+template<>
+inline bool reader::read<std::vector<uint64_t>>
+        (std::vector<uint64_t> &vect) {
     return reader::read_vector(vect);
 }
 

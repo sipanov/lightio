@@ -69,6 +69,34 @@
  3 4 5 6
 
 
+# name: uint8_vect
+# type: matrix
+# rows: 1
+# columns: 4
+ 3 4 5 6
+
+
+# name: uint16_vect
+# type: matrix
+# rows: 1
+# columns: 4
+ 3 4 5 6
+
+
+# name: uint32_vect
+# type: matrix
+# rows: 1
+# columns: 4
+ 3 4 5 6
+
+
+# name: uint64_vect
+# type: matrix
+# rows: 1
+# columns: 4
+ 3 4 5 6
+
+
 # name: float_vect
 # type: matrix
 # rows: 1

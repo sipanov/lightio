@@ -65,6 +65,10 @@ int main() {
     std::vector<int16_t> int16_vect;
     std::vector<int32_t> int32_vect;
     std::vector<int64_t> int64_vect;
+    std::vector<uint8_t> uint8_vect;
+    std::vector<uint16_t> uint16_vect;
+    std::vector<uint32_t> uint32_vect;
+    std::vector<uint64_t> uint64_vect;
     std::vector<float> float_vect;
     std::vector<double> double_vect;
     std::vector<long double> ldouble_vect;
@@ -139,6 +143,18 @@ int main() {
             } else if (input.next_name() == "int64_vect") {
                 consumed = input.read(int64_vect);
                 output.write(int64_vect, "int64_vect");
+            } else if (input.next_name() == "uint8_vect") {
+                consumed = input.read(uint8_vect);
+                output.write(uint8_vect, "uint8_vect");
+            } else if (input.next_name() == "uint16_vect") {
+                consumed = input.read(uint16_vect);
+                output.write(uint16_vect, "uint16_vect");
+            } else if (input.next_name() == "uint32_vect") {
+                consumed = input.read(int32_vect);
+                output.write(uint32_vect, "uint32_vect");
+            } else if (input.next_name() == "uint64_vect") {
+                consumed = input.read(uint64_vect);
+                output.write(uint64_vect, "uint64_vect");
             } else if (input.next_name() == "float_vect") {
                 consumed = input.read(float_vect);
                 output.write(float_vect, "float_vect");
