@@ -44,9 +44,15 @@ inline void writer::write_header(enum octave_type type,
 
 /// Write dimentions
 inline void writer::write_dims(std::size_t rows, std::size_t cols) {
-    // TODI: add crosscheck with var type.
+    // TODO: add crosscheck with var type.
+/* Old way
     *m_os << "# rows: " << rows << std::endl;
     *m_os << "# columns: " << cols << std::endl;
+
+  Use new way from now on
+ */
+   *m_os << "# ndims: 2" << std::endl;
+   *m_os << rows << " " << cols << std::endl;
 }
 
 //// Write string dims
