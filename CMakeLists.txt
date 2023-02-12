@@ -1,5 +1,5 @@
 #
-# Copyright (c) Sergey Panov 2018
+# Copyright (c) Sergey Panov 2018, 2022
 # Copyright 2018 Second Star Algonumerix LLC
 #
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
