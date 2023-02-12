@@ -17,6 +17,7 @@ FIND_PACKAGE(Boost 1.34
 
 add_executable(csvio_tests csvio_tests.cpp)
 add_executable(octio_test octio_test.cpp octio.hpp octio_impl.hpp)
+add_executable(octio_write_test octio_write_test.cpp octio.hpp octio_impl.hpp)
 add_executable(ioprobe_test ioprobe_test.cpp ioprobe.hpp)
 
 target_link_libraries(csvio_tests ${Boost_LIBRARIES})

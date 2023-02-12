@@ -16,6 +16,7 @@ namespace octio {
 class writer_impl;
 
 class writer {
+private:
     writer() {}
 
 public:
@@ -33,18 +34,36 @@ private:
     std::unique_ptr<writer_impl> impl;
 };
 
-enum octave_type {
+enum octave_obj_type {
     INVALID,
     SCALAR,
     STRING,
-    COMPLEX_SCALAR,
-    MATRIX,
-    COMPLEX_MATRIX,
     VECTOR,
-    COMPLEX_VECTOR,
     COVECTOR,
-    COMPLEX_COVECTOR
+    MATRIX,
+    NDIM_ARRAY
 };
+enum octave_var_type {
+    DOUBLE,
+    COMPLEX,
+    CHAR,
+    INT8,
+    UINT8,
+    INT16,
+    UINT16,
+    INT32,
+    UINT32,
+    INT64,
+    UINT64
+};
+
+struct octave_obj_descriptor {
+    octave_obj_type obj_type;
+    octave_var_type var_type;
+    std::vector<unsigned> dims;
+};
+
+#ifndef OCTAVE_WRITE_ONLY
 
 class reader_impl;
 
@@ -56,7 +75,7 @@ public:
 
     std::string title();
 
-    octave_type next_type();
+     octave_obj_descriptor next_type();
 
     std::string next_name();
 
@@ -67,6 +86,8 @@ public:
 private:
     std::unique_ptr<reader_impl> impl;
 };
+
+#endif
 
 }
 }
