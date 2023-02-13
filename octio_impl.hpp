@@ -219,6 +219,7 @@ inline void writer_impl::write_header(octave_obj_descriptor & type,
             case STRING:
                 assert(type.dims.size() > 0 && type.dims.size() < 3);
                 *m_os << elements_tag << ' ' << ((type.dims.size() > 1) ? type.dims[1] : 1) << std::endl;
+                *m_os << comment_char << ' ';
                 *m_os << length_tag << ' ' << type.dims[0] << std::endl;
                 break;
             case VECTOR:
