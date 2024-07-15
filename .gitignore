@@ -1,4 +1,5 @@
 .idea/
-cmake-build-*/
+cmake-build*/
 *.swp
 *~
+test_data/test_octio_out.mat test_data/test_octio_write.mat
