@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2018, 2022 Sergey Panov.
+// Copyright (c) 2018, 2022, 2024 Sergey Panov.
 // Copyright (c) 2018 Second Star Algonumerix LLC
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -104,8 +104,7 @@ int main() {
         bool consumed = false;
         // std::cout << input.next_name() << std::endl;
         // std::cout << input.next_type() << std::endl;
-        octave_obj_descriptor descr = input.next_type();
-        if (descr.obj_type == SCALAR && descr.var_type != COMPLEX) {
+        if (input.next_type() == SCALAR) {
             if (input.next_name() == "int_var") {
                 consumed = input.read(int_var);
                 output.write(int_var, "int_var");
@@ -119,7 +118,7 @@ int main() {
                 consumed = input.read(ldouble_var);
                 output.write(ldouble_var, "ldouble_var");
             }
-        } else if (descr.obj_type == SCALAR && descr.var_type == COMPLEX) {
+        } else if (input.next_type() == COMPLEX_SCALAR) {
             if (input.next_name() == "cfloat_var") {
                 consumed = input.read(cfloat_var);
                 output.write(cfloat_var, "cfloat_var");
@@ -130,9 +129,8 @@ int main() {
                 consumed = input.read(cldouble_var);
                 output.write(cldouble_var, "cldouble_var");
             }
-        } else if (descr.var_type != COMPLEX &&
-                   (descr.obj_type == VECTOR ||
-                    descr.obj_type == COVECTOR)) {
+        } else if (input.next_type() == VECTOR
+                   || input.next_type() == COVECTOR) {
             if (input.next_name() == "int8_vect") {
                 consumed = input.read(int8_vect);
                 output.write(int8_vect, "int8_vect");
@@ -174,9 +172,8 @@ int main() {
             } else if (input.next_name() == "ldouble_covect") {
                 consumed = input.read(ldouble_covect);
             }
-        } else if (descr.var_type == COMPLEX &&
-                   (descr.obj_type == VECTOR ||
-                    descr.obj_type == COVECTOR)) {
+        } else if (input.next_type() == COMPLEX_VECTOR
+                   || input.next_type() == COMPLEX_COVECTOR) {
             if (input.next_name() == "cint_vect") {
                 consumed = input.read(cint_vect);
                 output.write(cint_vect, "cint_vect");
@@ -195,7 +192,7 @@ int main() {
             } else if (input.next_name() == "cldouble_covect") {
                 consumed = input.read(cldouble_covect);
             }
-        } else if (descr.var_type != COMPLEX && descr.obj_type == MATRIX) {
+        } else if (input.next_type() == MATRIX) {
             if (input.next_name() == "int_mat") {
                 consumed = input.read(int_mat);
             } else if (input.next_name() == "float_mat") {
@@ -206,7 +203,7 @@ int main() {
             } else if (input.next_name() == "ldouble_mat") {
                 consumed = input.read(ldouble_var);
             }
-        } else if (descr.var_type == COMPLEX && descr.obj_type == MATRIX) {
+        } else if (input.next_type() == COMPLEX_MATRIX) {
             if (input.next_name() == "cfloat_mat") {
                 consumed = input.read(cfloat_mat);
                 output.write(cfloat_mat, "cfloat_mat");
@@ -222,7 +219,7 @@ int main() {
             input.skip_one();
         }
 
-    } while (input.next_type().obj_type != INVALID);
+    } while (input.next_type() != INVALID);
 
 
     std::cout << "int_var: " << int_var << std::endl;
