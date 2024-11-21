@@ -8,6 +8,7 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <complex>
 #include <boost/lexical_cast.hpp>
