@@ -7,13 +7,47 @@
 
 #pragma once
 
+#include <cstdint>
 #include <complex>
 #include <fstream>
 #include <type_traits>
-#include <cstdint>
 
 namespace ssan {
 namespace octio {
+
+namespace {
+// make sure int8_t and uint8_t are treated as integer types and not as char
+inline
+std::ostream& operator<<(std::ostream& os, int8_t val) {
+    return os << static_cast<short>(val);
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, int8_t& val) {
+    return os << static_cast<short>(val);
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, uint8_t val) {
+    return os << static_cast<unsigned short>(val);
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, uint8_t& val) {
+    return os << static_cast<unsigned short>(val);
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, std::complex<int8_t> val) {
+    return os << std::complex<short>(short(val.real()),short(val.imag()));
+}
+
+inline
+std::ostream& operator<<(std::ostream& os, std::complex<int8_t>& val) {
+    return os << std::complex<short>(short(val.real()),short(val.imag()));
+}
+}
+
 /// Write header
 inline void writer::write_header(enum octave_type type,
                                  const std::string &name) {
@@ -61,16 +95,7 @@ inline void writer::write_strdesc(std::size_t length, std::size_t count) {
 // Write one scalar value
 template<typename T>
 void writer::write_one(const T &val) {
-    *m_os << ' ' << boost::lexical_cast<std::string>(val);
-}
-
-/// Write one complex value in "(<real>,<imag>)" format
-template<typename T>
-void writer::write_one_complex(const std::complex<T> &val) {
-    *m_os << ' ' << "("
-          << boost::lexical_cast<std::string>(val.real()) << ','
-          << boost::lexical_cast<std::string>(val.imag())
-          << ")";
+    *m_os << ' ' << val;
 }
 
 template<typename T>
@@ -97,7 +122,7 @@ template<typename T>
 bool writer::write_complex_scalar(const std::complex<T> &val,
                                   const std::string &name) {
     write_header(COMPLEX_SCALAR, name);
-    write_one_complex(val);
+    write_one(val);
     *m_os << std::endl;
     *m_os << std::endl << std::endl;
     return true;
@@ -113,7 +138,7 @@ bool writer::write_complex_vector(const std::vector<std::complex<T>> &vect,
         write_dims(1, vect.size());
 
         for (auto element : vect)
-            write_one_complex(element);
+            write_one(element);
 
         *m_os << std::endl;
         *m_os << std::endl << std::endl;
@@ -133,7 +158,7 @@ bool writer::write_complex_covector(const std::vector<std::complex<T>> &vect,
         write_dims(vect.size(), 1);
 
         for (auto element : vect) {
-            write_one_complex(element);
+            write_one(element);
             *m_os << std::endl;
         }
 
@@ -155,7 +180,7 @@ bool writer::write_complex_matrix(
         write_dims(mat.size(), mat[0].size());
         for (auto &row : mat) {
             for (auto element : row)
-                write_one_complex(element);
+                write_one(element);
 
             *m_os << std::endl;
         }
