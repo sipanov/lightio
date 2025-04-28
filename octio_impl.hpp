@@ -23,27 +23,12 @@ std::ostream& operator<<(std::ostream& os, int8_t val) {
 }
 
 inline
-std::ostream& operator<<(std::ostream& os, int8_t& val) {
-    return os << static_cast<short>(val);
-}
-
-inline
 std::ostream& operator<<(std::ostream& os, uint8_t val) {
     return os << static_cast<unsigned short>(val);
 }
 
 inline
-std::ostream& operator<<(std::ostream& os, uint8_t& val) {
-    return os << static_cast<unsigned short>(val);
-}
-
-inline
 std::ostream& operator<<(std::ostream& os, std::complex<int8_t> val) {
-    return os << std::complex<short>(short(val.real()),short(val.imag()));
-}
-
-inline
-std::ostream& operator<<(std::ostream& os, std::complex<int8_t>& val) {
     return os << std::complex<short>(short(val.real()),short(val.imag()));
 }
 }
